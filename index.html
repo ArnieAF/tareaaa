@@ -1,29 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi primera página accesible</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Atardecer geométrico</title>
+  <style>
+    body {
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
 <body>
-    <h1>Mi primera página accesible</h1>
+  <canvas id="sunset" width="400" height="600"></canvas>
 
-    <p id="texto">
-        Esta es mi primera página accesible. <br>
-        Aquí estoy aprendiendo a usar JavaScript para mejorar la accesibilidad. <br>
-        Puedo activar el modo de alto contraste y ajustar el tamaño del texto fácilmente.
-    </p>
+  <script>
+    const canvas = document.getElementById("sunset");
+    const ctx = canvas.getContext("2d");
 
-    <button id="btn-contraste">Activar alto contraste</button>
-    <button id="btn-fuente">Aumentar tamaño de fuente</button>
+    const colors = [
+      "#FF652E", // naranja fuerte
+      "#FF8B3D", // naranja medio
+      "#FFC15E", // amarillo cálido
+      "#FFE48B", // amarillo claro
+      "#6A9D93", // verde mar
+      "#2F8DB2", // azul cielo marino
+      "#0F4F73", // azul profundo
+      "#001833"  // azul oscuro noche
+    ];
 
-    <!-- Área para mensajes accesibles -->
-    <div id="mensajes" aria-live="polite"></div>
+    const stripeHeight = canvas.height / colors.length;
+    const angles = [40, -35, 25, -30, 20, -25, 15, -20];
 
-    <footer>
-        <p>Creado por: <strong>Arnie Adriano</strong></p>
-    </footer>
-    <script src="script.js"></script>
+ // Fondo del color más oscuro
+ctx.fillStyle = colors[colors.length - 1];
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+colors.forEach((color, i) => {
+  const yTop = i * stripeHeight - 30;   // más solapamiento
+  const yBottom = (i + 1) * stripeHeight + 10;
+  const offset = angles[i];
+
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(-500, yTop + offset);
+  ctx.lineTo(canvas.width + 350, yTop - offset);
+ctx.lineTo(canvas.width + 750, yBottom - offset);
+  ctx.lineTo(-500, yBottom + offset);
+  ctx.closePath();
+  ctx.fill();
+});
+
+
+    // Dibujar el sol
+    const sunRadius = 75;
+    const sunX = canvas.width / 2.80;
+    const sunY = canvas.height / 2.20;
+
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, sunRadius, Math.PI, 2 * Math.PI);
+    ctx.fillStyle = "#FF652E";
+    ctx.fill();
+  </script>
 </body>
 </html>

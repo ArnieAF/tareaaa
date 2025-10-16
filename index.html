@@ -15,6 +15,16 @@
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
+    p {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #fff; /* opcional */
+  padding: 10px;
+}
+
   </style>
 </head>
 <body>
@@ -51,7 +61,7 @@ colors.forEach((color, i) => {
   ctx.beginPath();
   ctx.moveTo(-500, yTop + offset);
   ctx.lineTo(canvas.width + 350, yTop - offset);
-ctx.lineTo(canvas.width + 750, yBottom - offset);
+  ctx.lineTo(canvas.width + 750, yBottom - offset);
   ctx.lineTo(-500, yBottom + offset);
   ctx.closePath();
   ctx.fill();
@@ -68,5 +78,9 @@ ctx.lineTo(canvas.width + 750, yBottom - offset);
     ctx.fillStyle = "#FF652E";
     ctx.fill();
   </script>
+  <footer>
+    <p>ARNIE JEAMPOOL ADRIANO FLORES</p>
+  </footer>
 </body>
 </html>
+
